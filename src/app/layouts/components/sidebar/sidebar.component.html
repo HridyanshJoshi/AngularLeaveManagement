@@ -1,0 +1,44 @@
+<div class="sidebar-heading">
+  <img class="img-fluid" src="../../../../assets/img/logo.svg" />
+</div>
+<div class="list-group list-group-flush">
+  <a class="list-group-item list-group-item-action py-3" [routerLink]="['/staff/view/', user?._id]">
+    <div class="align-content-center align-items-center d-flex">
+      <div class="imgdiv" [class.bg-white]="user?.profile">
+        <span class="material-icons" *ngIf="!user?.profile">
+          perm_identity
+        </span>
+        <img
+          class="img-fluid rounded-circle"
+          *ngIf="user?.profile"
+          [src]="imgUrl + user?.profile"
+          alt=""
+        />
+      </div>
+      <div class="ps-2">
+        <h5 class="m-0">{{ user?.name }}</h5>
+        <p class="text-muted m-0">{{ user?.dept }} {{ user?.role }}</p>
+      </div>
+    </div>
+  </a>
+  <a
+    routerLink="/dashboard"
+    routerLinkActive="active"
+    [routerLinkActiveOptions]="{ exact: true }"
+    class="list-group-item list-group-item-action py-3"
+    >Dashboard</a
+  >
+  <a
+    *ngIf="user?.role == 'HOD'"
+    routerLink="staff"
+    routerLinkActive="active"
+    class="list-group-item list-group-item-action py-3"
+    >Staff Management</a
+  >
+  <a
+    routerLink="leave"
+    routerLinkActive="active"
+    class="list-group-item list-group-item-action py-3"
+    >Leave Management</a
+  >
+</div>

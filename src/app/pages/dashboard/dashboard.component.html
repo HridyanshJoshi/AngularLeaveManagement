@@ -1,0 +1,112 @@
+<div class="p-3">
+    <div class="row gx-3 gy-3" *ngIf="user?.role == 'HOD'">
+        <div class="col-md-4">
+            <div class="card dashCard">
+                <div class="card-body text-center">
+                    <div class="dashIcon bg-primary m-auto">
+                        <span class="material-icons">
+                            group
+                        </span>
+                    </div>
+                    <h1 class="mt-3">{{staffCount}}</h1>
+                    <h5 class="card-title mb-2 text-muted">Total Staff</h5>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card dashCard">
+                <div class="card-body text-center">
+                    <div class="dashIcon bg-danger m-auto">
+                        <span class="material-icons">
+                            person_off
+                        </span>
+                    </div>
+                    <h1 class="mt-3">{{leaveCount}}</h1>
+                    <h5 class="card-title mb-2 text-muted">Leaves</h5>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card dashCard">
+                <div class="card-body text-center">
+                    <div class="dashIcon bg-warning m-auto">
+                        <span class="material-icons">
+                            cake
+                        </span>
+                    </div>
+                    <h1 class="mt-3">1</h1>
+                    <h5 class="card-title mb-2 text-muted">Birthday</h5>
+                </div>
+            </div>
+        </div>
+        
+    </div>
+    <div class="row gx-3 gy-3" *ngIf="user?.role == 'Staff'">
+        <div class="col-md-4">
+            <div class="card dashCard">
+                <div class="card-body text-center">
+                    <div class="dashIcon bg-primary m-auto">
+                        <span class="material-icons">
+                            group
+                        </span>
+                    </div>
+                    <h1 class="mt-3">{{staffCount}}</h1>
+                    <h5 class="card-title mb-2 text-muted">Total</h5>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card dashCard">
+                <div class="card-body text-center">
+                    <div class="dashIcon bg-danger m-auto">
+                        <span class="material-icons">
+                            person_off
+                        </span>
+                    </div>
+                    <h1 class="mt-3">2</h1>
+                    <h5 class="card-title mb-2 text-muted">Leaves</h5>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card dashCard">
+                <div class="card-body text-center">
+                    <div class="dashIcon bg-warning m-auto">
+                        <span class="material-icons">
+                            cake
+                        </span>
+                    </div>
+                    <h1 class="mt-3">1</h1>
+                    <h5 class="card-title mb-2 text-muted">Birthday</h5>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="gx-3 gy-3 mt-0 row">
+        <div class="col-md-8">
+            <div class="card" style="height: 20rem;">
+                <div class="card-body">
+                    <h5 class="card-title">Lorem</h5>
+                    <p class="card-text text-muted">I must explain to you how all this mistaken idea of denouncing
+                        pleasure and praising pain was born and I will give you a complete account of the system, and
+                        expound the actual teachings of the great explorer of the truth, the master-builder of human
+                        happiness. Born and I will give you a complete account of the system, and expound the actual
+                        teachings of the great explorer of the truth, the master-builder of human. I will give you a
+                        complete account of the system, and expound the actual teachings of the great explorer of the
+                        truth the master-builder.</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card" style="height: 20rem;">
+                <div class="card-body">
+                    <h5 class="card-title">Ipsem</h5>
+                    <p class="card-text text-muted">But I must explain to you how all this mistaken idea of denouncing
+                        pleasure and
+                        praising pain was born and I will give you a complete account of the system, and expound the
+                        actual teachings of the great explorer of the truth, the master-builder of human happiness.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

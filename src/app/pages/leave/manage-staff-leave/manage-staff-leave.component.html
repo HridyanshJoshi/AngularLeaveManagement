@@ -1,0 +1,74 @@
+<div class="card">
+    <h5 class="card-header">Staff Leaves</h5>
+    <div class="card-body table-responsive">
+        <div class="input-group mb-3">
+            <input type="text" class="form-control" placeholder="Search name" [(ngModel)]="searchName"
+                (ngModelChange)="searchLeave()" aria-label="Recipient's username" aria-describedby="basic-addon2">
+            <span class="input-group-text" id="basic-addon2">Search</span>
+        </div>
+        <table class="table border">
+            <thead>
+                <tr>
+                    <th scope="col">Sr No.</th>
+                    <th scope="col" (click)="sort('name')">Name
+                        <span class="material-icons sort"
+                            [ngClass]="{'text-dark': prop == 'name', 'rotate90':sortorder && prop == 'name'}">
+                            arrow_drop_down
+                        </span>
+                    </th>
+                    <th scope="col">Date</th>
+                    <th scope="col" (click)="sort('reason')">Reason
+                        <span class="material-icons sort"
+                            [ngClass]="{'text-dark': prop == 'reason', 'rotate90':sortorder && prop == 'reason'}">
+                            arrow_drop_down
+                        </span>
+                    </th>
+                    <th scope="col" (click)="sort('status')">Status
+                        <span class="material-icons sort"
+                            [ngClass]="{'text-dark': prop == 'status', 'rotate90':sortorder && prop == 'status'}">
+                            arrow_drop_down
+                        </span>
+                    </th>
+                    <th scope="col">Action</th>
+                </tr>
+            </thead>
+            <tbody *ngIf="!leaveLoading">
+                <tr *ngFor="let item of leaves; let i = index">
+                    <th scope="row">{{i+1}}</th>
+                    <th scope="row">{{item.name}}</th>
+                    <td>
+                        <div class="nowrap"> {{item.from | date:'dd/MM/YY'}} - {{item.to | date:'dd/MM/YY'}}
+                        </div>
+                    </td>
+                    <td>{{item.reason}}</td>
+                    <td>
+                        <div [ngSwitch]="item.status">
+                            <span class="badge rounded-pill bg-secondary" *ngSwitchCase="''">Pending</span>
+                            <span class="badge rounded-pill bg-secondary" *ngSwitchCase="null">Pending</span>
+                            <span class="badge rounded-pill bg-success" *ngSwitchCase="'approved'">Approved</span>
+                            <span class="badge rounded-pill bg-danger" *ngSwitchCase="'cancelled'">Cancelled</span>
+                        </div>
+                    </td>
+                    <td>
+                        <div class="d-flex">
+                            <button class="btn btn-danger btn-sm" (click)="actionLeave(item, 'cancelled')">Cancel</button>
+                            <button class="btn btn-success btn-sm ms-1" (click)="actionLeave(item, 'approved')">Approve</button>
+                        </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <ngx-skeleton-loader *ngIf="leaveLoading" count="5" [theme]="{ 
+            'border-radius': '5px',
+            height: '50px',
+            'background-color': '#eee',
+            border: '1px solid white'
+            }">
+        </ngx-skeleton-loader>
+    </div>
+    <div class="card-footer">
+        <ngb-pagination size="sm" class="d-flex justify-content-end" [collectionSize]="templeave?.length"
+            [(page)]="page" [pageSize]="pageSize" (pageChange)="refreshCountries()" aria-label="Default pagination">
+        </ngb-pagination>
+    </div>
+</div>

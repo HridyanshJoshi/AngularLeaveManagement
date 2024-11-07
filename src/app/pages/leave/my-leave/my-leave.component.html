@@ -1,0 +1,52 @@
+<div class="card">
+    <div class="align-items-center card-header d-flex justify-content-between">
+        <h5 class="m-0">Leaves </h5>
+        <a class="btn btn-primary" routerLink="apply-for-leave">Add Leave</a>
+    </div>
+    <div class="card-body table-responsive">
+        <table class="table border">
+            <thead>
+                <tr>
+                    <th scope="col">Id</th>
+                    <th scope="col">From Date</th>
+                    <th scope="col">To Date</th>
+                    <th scope="col">Reason</th>
+                    <th scope="col">Status</th>
+                    <th scope="col">Action</th>
+                </tr>
+            </thead>
+            <tbody *ngIf="!leaveLoading">
+                <tr *ngFor="let item of leaves; let i = index">
+                    <th scope="row">{{item.id}}</th>
+                    <td>{{item.from | date}}</td>
+                    <td>{{item.to | date}}</td>
+                    <td>{{item.reason}}</td>
+                    <td>
+                        <div [ngSwitch]="item.status">
+                            <span class="badge rounded-pill bg-secondary" *ngSwitchCase="''">Pending</span>
+                            <span class="badge rounded-pill bg-secondary" *ngSwitchCase="null">Pending</span>
+                            <span class="badge rounded-pill bg-success" *ngSwitchCase="'approved'">Approved</span>
+                            <span class="badge rounded-pill bg-danger" *ngSwitchCase="'cancelled'">Cancelled</span>
+                        </div>
+                    </td>
+                    <td>
+                        <a class="btn btn-info btn-sm" (click)="onAction(item, 'view')">View</a>
+                        <a class="btn btn-primary btn-sm ms-1" (click)="onAction(item, 'edit')">Edit</a>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <ngx-skeleton-loader *ngIf="leaveLoading" count="5" [theme]="{ 
+            'border-radius': '5px',
+            height: '50px',
+            'background-color': '#eee',
+            border: '1px solid white'
+            }">
+        </ngx-skeleton-loader>
+    </div>
+    <div class="card-footer">
+        <ngb-pagination size="sm" class="d-flex justify-content-end" [collectionSize]="templeave?.length"
+            [(page)]="page" [pageSize]="pageSize" (pageChange)="loadLeave()" aria-label="Default pagination">
+        </ngb-pagination>
+    </div>
+</div>

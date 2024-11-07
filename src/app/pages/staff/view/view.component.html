@@ -1,0 +1,53 @@
+<div class="row gx-3">
+  <div class="col-md-4">
+    <div class="card">
+      <img
+        *ngIf="this.staffUser?.profile"
+        [src]="imgUrl.concat(this.staffUser?.profile)"
+        class="card-img-top"
+        [alt]="this.staffUser?.name"
+      />
+      <img
+        *ngIf="!this.staffUser?.profile"
+        src="../../../assets/img/defaultPic.png"
+        class="card-img-top"
+        alt="..."
+      />
+      <div class="card-body">
+        <h5 class="card-title">{{ this.staffUser?.name }}</h5>
+        <h6 class="card-subtitle mb-2 text-muted">
+          {{ this.staffUser?.dept }}
+        </h6>
+        <ul
+          class="list-group list-group-flush border rounded my-3"
+          *ngIf="this.staffUser"
+        >
+          <li class="list-group-item">{{ this.staffUser?.email }}</li>
+          <li class="list-group-item">{{ this.staffUser?.phone }}</li>
+          <li class="list-group-item">{{ this.staffUser?.username }}</li>
+        </ul>
+        <a
+          class="btn btn-primary"
+          [routerLink]="['../../../staff/edit', this.staffUser?._id]"
+          >Edit</a
+        >
+      </div>
+    </div>
+  </div>
+  <div class="col-md-8">
+    <div class="card" style="height: 86vh">
+      <h5 class="card-header">Leave History</h5>
+      <div class="card-body">
+        Lorem ipsum, or lipsum as it is sometimes known, is dummy text used in
+        laying out print, graphic or web designs. The passage is attributed to
+        an unknown. Lipsum as it is sometimes known, is dummy text used in
+        laying out print, graphic or web designs. The passage is attributed to
+        an unknown. Lorem ipsum, or lipsum as it is sometimes known, is dummy
+        text used in laying out print, graphic or web designs. The passage is
+        attributed to an unknown. Lipsum as it is sometimes known, is dummy text
+        used in laying out print, graphic or web designs. The passage is
+        attributed to an unknown
+      </div>
+    </div>
+  </div>
+</div>

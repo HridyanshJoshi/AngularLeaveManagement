@@ -1,0 +1,77 @@
+<div class="row">
+    <div class="col-md-12">
+        <div class="card">
+            <div class="align-items-center card-header d-flex justify-content-between">
+                <h5 class="m-0">Staff List </h5><a class="btn btn-primary" [routerLink]="['add']">Add
+                    Staff</a>
+            </div>
+            <div class="card-body table-resposive">
+                <div class="input-group mb-3">
+                    <input type="text" class="form-control" placeholder="Search name" [(ngModel)]="searchName"
+                        (ngModelChange)="searchLeave()" aria-label="Recipient's username"
+                        aria-describedby="basic-addon2">
+                    <span class="input-group-text" id="basic-addon2">Search</span>
+                </div>
+                <table class="table border">
+                    <thead>
+                        <tr>
+                            <th scope="col" (click)="sort('name')">Name
+                                <span class="material-icons sort"
+                                    [ngClass]="{'text-dark': prop == 'name', 'rotate90':sortorder && prop == 'name'}">
+                                    arrow_drop_down
+                                </span>
+                            </th>
+                            <th scope="col" (click)="sort('username')">Username
+                                <span class="material-icons sort"
+                                    [ngClass]="{'text-dark': prop == 'username', 'rotate90':sortorder && prop == 'username'}">
+                                    arrow_drop_down
+                                </span>
+                            </th>
+                            <th scope="col" (click)="sort('email')">Email
+                                <span class="material-icons sort"
+                                    [ngClass]="{'text-dark': prop == 'email', 'rotate90':sortorder && prop == 'email'}">
+                                    arrow_drop_down
+                                </span>
+                            </th>
+                            <th scope="col" (click)="sort('phone')">Mobile
+                                <span class="material-icons sort"
+                                    [ngClass]="{'text-dark': prop == 'phone', 'rotate90':sortorder && prop == 'phone'}">
+                                    arrow_drop_down
+                                </span>
+                            </th>
+                            <th scope="col">Action</th>
+                        </tr>
+                    </thead>
+                    <tbody *ngIf="!staffLoading">
+                        <tr *ngFor="let item of staff">
+                            <th scope="row">{{item.name}}</th>
+                            <td>{{item.username}}</td>
+                            <td>{{item.email}}</td>
+                            <td>{{item.phone}}</td>
+                            <td>
+                                <div class="d-flex">
+                                    <a class="btn btn-info btn-sm" [routerLink]="['view', item._id]">View</a>
+                                    <button class="btn btn-danger btn-sm ms-1"
+                                        (click)="deleteStaff(item)">Delete</button>
+                                </div>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+                <ngx-skeleton-loader *ngIf="staffLoading" count="5" [theme]="{ 
+                    'border-radius': '5px',
+                    height: '50px',
+                    'background-color': '#eee',
+                    border: '1px solid white'
+                    }">
+                </ngx-skeleton-loader>
+
+            </div>
+            <div class="card-footer">
+                <ngb-pagination size="sm" class="d-flex justify-content-end" [collectionSize]="tempStaff?.length"
+                    [(page)]="page" [pageSize]="pageSize" (pageChange)="refreshStaffList()"
+                    aria-label="Default pagination"></ngb-pagination>
+            </div>
+        </div>
+    </div>
+</div>

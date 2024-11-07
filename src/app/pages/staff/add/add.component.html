@@ -1,0 +1,193 @@
+<div class="row">
+  <div class="col-md-12">
+    <div class="card">
+      <h5 class="card-header">Add Staff</h5>
+      <div class="card-body">
+        <form [formGroup]="registerForm" (ngSubmit)="registerSubmit()">
+          <div class="row g-3">
+            <div class="col-md-4">
+              <label for="">Select Role</label>
+              <select
+                class="form-select"
+                name="role"
+                formControlName="role"
+                [ngClass]="{
+                  'is-invalid': submitted && registerForm.get('role')?.errors
+                }"
+              >
+                <option disabled value="">Choose your role</option>
+                <option *ngFor="let item of roles" [ngValue]="item">
+                  {{ item }}
+                </option>
+              </select>
+              <div
+                *ngIf="submitted && registerForm.get('role')?.errors"
+                class="invalid-feedback"
+              >
+                <div *ngIf="registerForm.get('role')?.errors?.required">
+                  Role is required
+                </div>
+              </div>
+            </div>
+            <div class="col-md-4">
+              <label for="">Name</label>
+              <input
+                type="text"
+                class="form-control"
+                name="name"
+                formControlName="name"
+                [ngClass]="{
+                  'is-invalid': submitted && registerForm.get('name')?.errors
+                }"
+              />
+              <div
+                *ngIf="submitted && registerForm.get('username')?.errors"
+                class="invalid-feedback"
+              >
+                <div *ngIf="registerForm.get('username')?.errors?.required">
+                  Name is required
+                </div>
+              </div>
+            </div>
+            <div class="col-md-4">
+              <label for="">Username</label>
+              <input
+                type="text"
+                class="form-control"
+                name="username"
+                formControlName="username"
+                [ngClass]="{
+                  'is-invalid':
+                    submitted && registerForm.get('username')?.errors
+                }"
+              />
+              <div
+                *ngIf="submitted && registerForm.get('username')?.errors"
+                class="invalid-feedback"
+              >
+                <div *ngIf="registerForm.get('username')?.errors?.required">
+                  Username is required
+                </div>
+              </div>
+            </div>
+            <div class="col-md-4">
+              <label for="">Email</label>
+              <input
+                type="email"
+                class="form-control"
+                name="email"
+                formControlName="email"
+                [ngClass]="{
+                  'is-invalid': submitted && registerForm.get('email')?.errors
+                }"
+              />
+              <div
+                *ngIf="submitted && registerForm.get('email')?.errors"
+                class="invalid-feedback"
+              >
+                <div *ngIf="registerForm.get('email')?.errors?.required">
+                  Email is required
+                </div>
+                <div *ngIf="registerForm.get('email')?.errors?.email">
+                  Please enter proper email
+                </div>
+              </div>
+            </div>
+            <div class="col-md-4">
+              <label for="">Contact Number</label>
+              <input
+                type="text"
+                minlength="10"
+                class="form-control"
+                name="phone"
+                formControlName="phone"
+                [ngClass]="{
+                  'is-invalid': submitted && registerForm.get('phone')?.errors
+                }"
+              />
+              <div
+                *ngIf="submitted && registerForm.get('phone')?.errors"
+                class="invalid-feedback"
+              >
+                <div *ngIf="registerForm.get('phone')?.errors?.required">
+                  Contact number is required
+                </div>
+                <div *ngIf="registerForm.get('phone')?.errors?.pattern">
+                  Contact number should be of 10 digits
+                </div>
+              </div>
+            </div>
+            <div class="col-md-4">
+              <label for="">Department</label>
+              <select
+                class="form-select"
+                name="dept"
+                formControlName="dept"
+                [ngClass]="{
+                  'is-invalid': submitted && registerForm.get('dept')?.errors
+                }"
+              >
+                <option disabled value="">Choose your department</option>
+                <option *ngFor="let item of department" [ngValue]="item">
+                  {{ item }}
+                </option>
+              </select>
+              <div
+                *ngIf="submitted && registerForm.get('dept')?.errors"
+                class="invalid-feedback"
+              >
+                <div *ngIf="registerForm.get('dept')?.errors?.required">
+                  Department is required
+                </div>
+              </div>
+            </div>
+            <div class="col-md-4">
+              <label for="">Password</label>
+              <input
+                type="password"
+                class="form-control"
+                name="password"
+                formControlName="password"
+                [ngClass]="{
+                  'is-invalid':
+                    submitted && registerForm.get('password')?.errors
+                }"
+              />
+              <div
+                *ngIf="submitted && registerForm.get('password')?.errors"
+                class="invalid-feedback"
+              >
+                <div *ngIf="registerForm.get('password')?.errors?.required">
+                  Password is required
+                </div>
+              </div>
+            </div>
+            <div class="col-md-4">
+              <label for="">Profile Image</label>
+              <input
+                type="file"
+                class="form-control"
+                name="profile"
+                (change)="onFileSelect($event)"
+              />
+            </div>
+          </div>
+        </form>
+      </div>
+      <div class="card-footer">
+        <button
+          type="submit"
+          (click)="registerSubmit()"
+          class="btn btn-success"
+        >
+          <span
+            *ngIf="registerloading"
+            class="spinner-border spinner-border-sm mr-1"
+          ></span>
+          Submit
+        </button>
+        <a routerLink="/staff" class="btn btn-outline-secondary ms-1">Back</a>
+      </div>
+    </div>
+  </div>
+</div>

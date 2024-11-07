@@ -1,0 +1,82 @@
+<div class="p-3">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="card">
+                <h5 class="card-header d-flex">
+                    {{!action?'Add': action == 'edit'?'Edit': 'View'}} Leave
+                </h5>
+                <form [formGroup]="addLeaveForm" (ngSubmit)="onLeaveSubmit()">
+                    <div class="card-body">
+                        <div class="form-row">
+                            <div class="mb-3 col-md-4">
+                                <label for="">From Date</label>
+                                <div class="input-group">
+                                    <input class="form-control" placeholder="yyyy-mm-dd" name="dp"
+                                        formControlName="from" ngbDatepicker [minDate]="today" #d1="ngbDatepicker"
+                                        [ngClass]="{
+                                        'is-invalid': addLeaveSubmitted && addLeaveForm.get('from')?.errors
+                                      }">
+                                    <button class="calendar rounded-0" (click)="d1.toggle()" type="button">
+                                        <span class="material-icons">
+                                            calendar_month
+                                        </span>
+                                    </button>
+                                    <div *ngIf="addLeaveSubmitted && addLeaveForm.get('from')?.errors"
+                                        class="invalid-feedback">
+                                        <div *ngIf="addLeaveForm.get('from')?.errors?.required">
+                                            From Date is required
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+                            <div class="mb-3 col-md-4">
+                                <label for="">To Date</label>
+                                <div class="input-group">
+                                    <input class="form-control" placeholder="yyyy-mm-dd" name="dp"
+                                        [minDate]="addLeaveForm.get('from')?.value" formControlName="to" ngbDatepicker
+                                        #d2="ngbDatepicker" [ngClass]="{
+                                        'is-invalid': addLeaveSubmitted && addLeaveForm.get('to')?.errors
+                                      }">
+                                    <button class="calendar rounded-0" (click)="d2.toggle()" type="button">
+                                        <span class="material-icons">
+                                            calendar_month
+                                        </span>
+                                    </button>
+                                    <div *ngIf="addLeaveSubmitted && addLeaveForm.get('to')?.errors"
+                                        class="invalid-feedback">
+                                        <div *ngIf="addLeaveForm.get('to')?.errors?.required">
+                                            To Date is required
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+                            <div class="mb-3 col-md-4">
+                                <label for="">Reason</label>
+                                <input type="text" class="form-control" formControlName="reason" [ngClass]="{
+                            'is-invalid': addLeaveSubmitted && addLeaveForm.get('reason')?.errors
+                          }" />
+                                <div *ngIf="addLeaveSubmitted && addLeaveForm.get('reason')?.errors"
+                                    class="invalid-feedback">
+                                    <div *ngIf="addLeaveForm.get('reason')?.errors?.required">
+                                        Reason is required
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-footer">
+                        <button [disabled]="addLeaveloading" class="btn btn-success" type="button"
+                            (click)="onLeaveSubmit()" *ngIf="action != 'view'">
+                            <span *ngIf="addLeaveloading" class="spinner-border spinner-border-sm"></span>
+                            {{action == 'edit'?'Update': 'Submit'}}
+                        </button>
+                        <a class="btn btn-outline-secondary ms-1" routerLink="/leave">Back</a>
+                    </div>
+                </form>
+
+            </div>
+        </div>
+    </div>
+</div>
